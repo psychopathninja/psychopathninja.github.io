@@ -1,48 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Mark Vincent Faith Item Portfolio">
 
-  <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="myportfolio">
+  <meta name="apple-mobile-web-app-title" content="Mark Vincent Faith Item">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>myportfolio</title>
+  <title>Mark Vincent Faith Item</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .old-site-crumple {
+      animation: crumpleOldPortfolio 2.8s ease-in-out forwards !important;
+      transform-origin: center center !important;
+      will-change: transform, opacity, filter, clip-path;
+    }
+
+    .redirect-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.25), rgba(2, 6, 23, 0.96));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      opacity: 0;
+      pointer-events: none;
+      animation: overlayFadeIn 2.8s ease-in-out forwards;
+    }
+
+    .message-box {
+      width: min(90vw, 560px);
+      background: rgba(255, 255, 255, 0.95);
+      color: #111827;
+      padding: 36px 34px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      animation: messageRise 2.8s ease-in-out forwards;
+    }
+
+    .message-box h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 42px);
+      letter-spacing: -1px;
+    }
+
+    .message-box p {
+      margin: 8px 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .message-box .small {
+      margin-top: 18px;
+      font-size: 13px;
+      opacity: 0.65;
+    }
+
+    .dust {
+      position: fixed;
+      z-index: 999998;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      animation: dustFly 2.8s ease-out forwards;
+    }
+
+    @keyframes crumpleOldPortfolio {
+      0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+
+      25% {
+        transform: scale(1.03) rotate(-1deg);
+        filter: blur(0);
+      }
+
+      50% {
+        transform: scale(0.82) rotate(5deg) skew(-10deg, 5deg);
+        filter: blur(1px);
+        clip-path: polygon(8% 5%, 93% 0, 98% 86%, 10% 97%);
+      }
+
+      75% {
+        transform: scale(0.28) rotate(24deg) skew(18deg, -12deg);
+        opacity: 0.65;
+        filter: blur(3px);
+        clip-path: polygon(30% 8%, 80% 18%, 68% 75%, 24% 82%);
+      }
+
+      100% {
+        transform: scale(0.02) rotate(65deg) skew(35deg, -25deg);
+        opacity: 0;
+        filter: blur(8px);
+        clip-path: polygon(45% 42%, 55% 43%, 54% 54%, 44% 52%);
+      }
+    }
+
+    @keyframes overlayFadeIn {
+      0% { opacity: 0; }
+      45% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes messageRise {
+      0% {
+        transform: translateY(24px) scale(0.95);
+        opacity: 0;
+      }
+
+      55% {
+        transform: translateY(24px) scale(0.95);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes dustFly {
+      0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: translate(var(--move-x), var(--move-y)) scale(1.8);
+        opacity: 0;
+      }
+    }
+  </style>
 
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = "3391216574";
   </script>
-  <!-- This script adds the flutter initialization JS code -->
+
   <script src="flutter.js" defer></script>
 </head>
+
 <body>
   <script>
+    const newPortfolio = "https://marksportfolio-phi.vercel.app/";
+
     window.addEventListener('load', function(ev) {
-      // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
@@ -50,10 +182,53 @@
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
             appRunner.runApp();
+
+            // Show the old portfolio first, then start the drama.
+            setTimeout(function() {
+              startDramaticRedirect();
+            }, 5000);
+
+            // Redirect after the crumple animation.
+            setTimeout(function() {
+              window.location.href = newPortfolio;
+            }, 8500);
           });
         }
       });
     });
+
+    function startDramaticRedirect() {
+      // Apply crumple effect to the old Flutter site elements.
+      Array.from(document.body.children).forEach(function(child) {
+        if (child.tagName.toLowerCase() !== "script" && !child.classList.contains("redirect-overlay")) {
+          child.classList.add("old-site-crumple");
+        }
+      });
+
+      // Dust particles for extra arte.
+      for (let i = 0; i < 14; i++) {
+        const dust = document.createElement("span");
+        dust.className = "dust";
+        dust.style.left = (30 + Math.random() * 40) + "vw";
+        dust.style.top = (35 + Math.random() * 30) + "vh";
+        dust.style.setProperty("--move-x", ((Math.random() - 0.5) * 500) + "px");
+        dust.style.setProperty("--move-y", ((Math.random() - 0.8) * 350) + "px");
+        document.body.appendChild(dust);
+      }
+
+      // Message overlay.
+      const overlay = document.createElement("div");
+      overlay.className = "redirect-overlay";
+      overlay.innerHTML = `
+        <div class="message-box">
+          <h1>Old Portfolio Archived</h1>
+          <p>This portfolio has been placed back in the baul.</p>
+          <p>Redirecting to Mark’s new portfolio...</p>
+          <p class="small">Goodbye, Flutter era. Goodbye, Muhammad Hamza.</p>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
   </script>
 </body>
 </html>
